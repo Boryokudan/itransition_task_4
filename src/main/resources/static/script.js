@@ -1,4 +1,4 @@
-renderUserTable();
+getUserTable();
 
 function validatePasswords() {
     const password = document.getElementById('password').value;
@@ -22,10 +22,10 @@ function toggleAll(source, containerId) {
     });
 }
 
-function renderUserTable() {
+function getUserTable() {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', "/api/user", true);
-    xhr.responseType = 'json';
+    xhr.open("GET", "/api/user", true);
+    xhr.responseType = "json";
 
     xhr.onload = () => {
         let status = xhr.status;
@@ -35,7 +35,7 @@ function renderUserTable() {
         } else if (status !== 200 || xhr.response == null) {
             location.reload();
         } else {
-
+            throw new Error("Could not render the table: " + status);
         }
     };
     xhr.send();
@@ -108,7 +108,7 @@ function performAction(action, containerId) {
             if (!response.ok) {
                 throw new Error("Network response was not: " + response.status);
             }
-            renderUserTable();
+            getUserTable();
             return response.text();
         })
         .catch(error => {
