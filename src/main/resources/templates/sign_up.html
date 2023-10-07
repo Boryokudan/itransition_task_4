@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Sign in</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js" defer></script>
+  <script type="text/javascript" src="../static/script.js" defer></script>
+</head>
+  <body>
+    <div class="mask d-flex align-items-center h-100" style="background-color: rgba(189,187,187,0.8);">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-5 col-md-8">
+            <form th:action="@{'/sign-up'}" method="post" class="bg-white rounded shadow-5-strong p-5" onsubmit="return validatePasswords();">
+              <div class="text-center mb-3">
+                <h4>Sign Up</h4>
+              </div>
+
+<!--              <div th:text="${param.error}"></div>-->
+<!--              <div th:text="${param.error.getClass().getName()}"></div>-->
+<!--              <div th:text="${param.error != null and param.error[0] eq 'exists'}"></div>-->
+
+              <div th:if="${param.error != null and param.error[0] eq 'exists'}">
+                <div class="alert alert-danger" role="alert">
+                  User already exists.
+                </div>
+              </div>
+              <div th:if="${param.error != null and param.error[0] eq 'unknown'}">
+                <div class="alert alert-danger" role="alert">
+                  Something went wrong.
+                </div>
+              </div>
+              <div id="passwordAlert" class="alert alert-danger d-none" role="alert">
+                Passwords do not match.
+              </div>
+              <div class="mb-3">
+                <label for="firstName" class="form-label h6">Full name</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  <input type="text" class="form-control" id="firstName" name="firstName" placeholder="John" required>
+                  <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Smith" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="position" class="form-label h6">Position</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                  <input type="text" class="form-control" id="position" name="position" placeholder="Software engineer" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label h6">Email</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="john.smith@gmail.com" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label h6">Password</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-key"></i></span>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="***********" required>
+                </div>
+              </div>
+              <div class="mb-5">
+                <label for="confirmedPassword" class="form-label h6">Confirm password</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fas fa-key"></i></span>
+                  <input type="password" class="form-control" id="confirmedPassword" name="confirmedPassword" placeholder="***********" required>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block mb-5">Sign up</button>
+              <div class="text-center">
+                <p>Got an account?<a th:href="@{'/sign-in'}"> Sign in.</a></p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
